@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<launch>
+	<node name="tf2odom" pkg="tf2odom" type="tf2odom"/>
+	<node name="tf2odom_loop_closure" pkg="tf2odom" type="tf2odom_loop_closure"/>
+
+</launch>
