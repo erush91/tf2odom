@@ -12,11 +12,8 @@ int main(int argc, char** argv){
   ros::NodeHandle node;
 
   ros::Publisher tf_odom_pub = 
-    node.advertise<nav_msgs::Odometry>("tf_odom", 10);
+    node.advertise<nav_msgs::Odometry>("H01/tf_odom", 10);
 
-  ros::Publisher tf_point_pub = 
-    node.advertise<geometry_msgs::PointStamped>("tf_point", 1);
-  
   tf::TransformListener listener;
   nav_msgs::Odometry odom_msg;
   geometry_msgs::TransformStamped tf_msg;
@@ -29,7 +26,7 @@ int main(int argc, char** argv){
   while (node.ok()){
     tf::StampedTransform transform;
     try{
-      listener.lookupTransform("/odom", "/base_link",  
+      listener.lookupTransform("world", "H01/imu_viz_link",  
                                ros::Time(0), transform);
     }
     catch (tf::TransformException ex){
@@ -43,13 +40,6 @@ int main(int argc, char** argv){
     tf::quaternionTFToMsg(transform.getRotation().normalize(), odom_msg.pose.pose.orientation);
 
     tf_odom_pub.publish(odom_msg);
-
-    point_msg.header.stamp = ros::Time::now();
-    point_msg.point.x = odom_msg.pose.pose.position.x;
-    point_msg.point.y = odom_msg.pose.pose.position.y;
-    point_msg.point.z = odom_msg.pose.pose.position.z;
-
-    tf_point_pub.publish(point_msg);
 
     rate.sleep();
   }

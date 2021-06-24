@@ -9,9 +9,7 @@ set(CMAKE_CXX_FLAGS "-std=c++0x")
 
 find_package(catkin REQUIRED COMPONENTS
   roscpp
-  eigen_stl_containers
   geometry_msgs
-  rosflight_msgs
   sensor_msgs
   std_msgs
   std_srvs
@@ -38,7 +36,7 @@ endif()
 
 catkin_package(
   INCLUDE_DIRS include
-  CATKIN_DEPENDS roscpp geometry_msgs rosflight_msgs sensor_msgs std_msgs tf
+  CATKIN_DEPENDS roscpp geometry_msgs sensor_msgs std_msgs tf
   DEPENDS Boost EIGEN3 YAML_CPP tf
 )
 
