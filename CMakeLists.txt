@@ -63,17 +63,6 @@ target_link_libraries(tf2odom
 
 add_dependencies(tf2odom ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-# tf (world-to-base_link to odom message)
-add_executable(tf2odom_loop_closure
-    src/tf2odom_loop_closure.cpp
-)
-
-target_link_libraries(tf2odom_loop_closure
-  ${catkin_LIBRARIES}
-)
-
-add_dependencies(tf2odom_loop_closure ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
 #############
 ## Install ##
 #############

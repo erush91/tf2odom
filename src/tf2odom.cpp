@@ -21,12 +21,16 @@ int main(int argc, char** argv){
 
   geometry_msgs::PointStamped point_msg; 
 
-  odom_msg.header.frame_id = "world"; 
+  std::string parent_frame = "world";
+  std::string child_frame = "D01/imu_viz_link";
+
+  odom_msg.header.frame_id = parent_frame; 
+  odom_msg.child_frame_id = child_frame;
   ros::Rate rate(10);
   while (node.ok()){
     tf::StampedTransform transform;
     try{
-      listener.lookupTransform("world", "D01/imu_viz_link",  
+      listener.lookupTransform(parent_frame, child_frame,  
                                ros::Time(0), transform);
     }
     catch (tf::TransformException ex){
