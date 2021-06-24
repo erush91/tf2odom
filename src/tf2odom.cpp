@@ -12,7 +12,7 @@ int main(int argc, char** argv){
   ros::NodeHandle node;
 
   ros::Publisher tf_odom_pub = 
-    node.advertise<nav_msgs::Odometry>("H01/tf_odom", 10);
+    node.advertise<nav_msgs::Odometry>("D01/tf2odom", 10);
 
   tf::TransformListener listener;
   nav_msgs::Odometry odom_msg;
@@ -21,12 +21,12 @@ int main(int argc, char** argv){
 
   geometry_msgs::PointStamped point_msg; 
 
-  odom_msg.header.frame_id = "odom"; 
-  ros::Rate rate(200);
+  odom_msg.header.frame_id = "world"; 
+  ros::Rate rate(10);
   while (node.ok()){
     tf::StampedTransform transform;
     try{
-      listener.lookupTransform("world", "H01/imu_viz_link",  
+      listener.lookupTransform("world", "D01/imu_viz_link",  
                                ros::Time(0), transform);
     }
     catch (tf::TransformException ex){
